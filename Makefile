@@ -66,16 +66,17 @@ verify-cluster-variables:
 	test $(CLUSTER_NAME) || (echo Please export CLUSTER_NAME variable ; exit 1)
 	test $(CLUSTER_REGION) || (echo Please export CLUSTER_REGION variable ; exit 1)
 
+
 create-eks-cluster: verify-cluster-variables
 	eksctl create cluster \
 	--name $(CLUSTER_NAME) \
 	--version 1.25 \
 	--region $(CLUSTER_REGION) \
 	--nodegroup-name linux-nodes \
-	--node-type m5.xlarge \
-	--nodes 5 \
-	--nodes-min 5 \
-	--nodes-max 10 \
+	--node-type t3.xlarge \
+	--nodes 3 \
+	--nodes-min 3 \
+	--nodes-max 5 \
 	--managed \
 	--with-oidc
 
